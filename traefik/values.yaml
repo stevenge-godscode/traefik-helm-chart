@@ -21,7 +21,7 @@ deployment:
   # -- Deployment or DaemonSet
   kind: Deployment
   # -- Number of pods of the deployment (only applies when kind == Deployment)
-  replicas: 1
+  replicas: 10
   # -- Number of old history to retain to allow rollback (If not set, default Kubernetes value is set to 10)
   # revisionHistoryLimit: 1
   # -- Amount of time (in seconds) before Kubernetes will send the SIGKILL signal if Traefik does not shut down
@@ -624,7 +624,7 @@ ports:
     protocol: TCP
     # -- Use nodeport if set. This is useful if you have configured Traefik in a
     # LoadBalancer.
-    # nodePort: 32080
+    nodePort: 32080
     # Port Redirections
     # Added in 2.2, you can make permanent redirects via entrypoints.
     # https://docs.traefik.io/routing/entrypoints/#redirection
@@ -669,7 +669,7 @@ ports:
     # targetPort: 80
     ## -- The port protocol (TCP/UDP)
     protocol: TCP
-    # nodePort: 32443
+    nodePort: 32443
     ## -- Specify an application protocol. This may be used as a hint for a Layer 7 load balancer.
     # appProtocol: https
     #
@@ -759,7 +759,7 @@ service:
   ## -- Single service is using `MixedProtocolLBService` feature gate.
   ## -- When set to false, it will create two Service, one for TCP and one for UDP.
   single: true
-  type: LoadBalancer
+  type: NodePort
   # -- Additional annotations applied to both TCP and UDP services (e.g. for cloud provider specific config)
   annotations: {}
   # -- Additional annotations for TCP service only
